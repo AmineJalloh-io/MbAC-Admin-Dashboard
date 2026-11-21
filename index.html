@@ -9,6 +9,7 @@
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Roboto,system-ui,sans-serif; }
     body { background:#f0f4fa; min-height:100vh; color:#1e2f4e; display:flex; flex-direction:column; }
 
+    /* TOPBAR */
     .topbar { background:linear-gradient(120deg,#1e3a5f,#2b4b77); color:#fff; padding:16px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px; box-shadow:0 6px 18px -8px rgba(10,25,50,0.5); position:sticky; top:0; z-index:100; flex-wrap:wrap; }
     .topbar-left { display:flex; align-items:center; gap:14px; }
     .logo { width:52px; height:52px; border-radius:16px; background:linear-gradient(135deg,#f5b942,#d98c00); display:flex; align-items:center; justify-content:center; font-family:Georgia,serif; font-weight:900; font-size:18px; color:#1e2f4e; box-shadow:0 6px 14px -4px rgba(0,0,0,0.35); }
@@ -17,16 +18,21 @@
     .topbar-right { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
     .live-badge { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); padding:8px 16px; border-radius:30px; font-size:13px; border:1px solid rgba(255,255,255,0.15); }
     .live-badge .dot { width:8px; height:8px; border-radius:50%; background:#4ade80; animation:pulse 1.5s infinite; }
-    @keyframes pulse { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(74,222,128,0.7); } 50% { opacity:0.7; box-shadow:0 0 0 8px rgba(74,222,128,0); } }
-    .btn-refresh { background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:9px 18px; border-radius:30px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:8px; }
-    .btn-refresh:hover { background:rgba(255,255,255,0.24); }
+    @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(74,222,128,0.7);} 50%{opacity:0.7;box-shadow:0 0 0 8px rgba(74,222,128,0);} }
+    .btn-top { background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:9px 18px; border-radius:30px; font-size:13px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:8px; text-decoration:none; }
+    .btn-top:hover { background:rgba(255,255,255,0.24); }
+    .btn-top.active { background:#f5b942; color:#1e2f4e; border-color:#f5b942; }
     .btn-refresh.spinning i { animation:spin 0.9s linear infinite; }
     @keyframes spin { to { transform:rotate(360deg); } }
-    .nav-link { background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:9px 18px; border-radius:30px; font-size:13px; font-weight:600; text-decoration:none; display:flex; align-items:center; gap:8px; }
-    .nav-link:hover { background:rgba(255,255,255,0.24); }
 
+    /* MAIN */
     .main { flex:1; padding:26px 28px 40px; max-width:1500px; margin:0 auto; width:100%; }
 
+    /* VIEWS */
+    .view { display:none; }
+    .view.active { display:block; }
+
+    /* KPI */
     .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-bottom:24px; }
     .kpi-card { background:#fff; border-radius:22px; padding:22px 24px; box-shadow:0 8px 22px -12px rgba(30,50,80,0.25); border:1px solid #e7eff9; display:flex; align-items:center; gap:18px; transition:transform 0.2s; }
     .kpi-card:hover { transform:translateY(-3px); }
@@ -36,21 +42,20 @@
     .kpi-icon.orange { background:#fff1d8; color:#d98c00; }
     .kpi-icon.purple { background:#efe6ff; color:#6c5ce7; }
     .kpi-icon.teal { background:#dcf5f0; color:#0d9b8a; }
-    .kpi-icon.red { background:#ffe3e3; color:#c0392b; }
     .kpi-info .kpi-label { font-size:12px; text-transform:uppercase; letter-spacing:0.8px; color:#6e86a5; font-weight:600; margin-bottom:4px; }
     .kpi-info .kpi-value { font-size:26px; font-weight:800; color:#1e2f4e; line-height:1.1; }
     .kpi-info .kpi-sub { font-size:12px; color:#8aa4c1; margin-top:4px; }
 
+    /* PANELS */
     .grid-2 { display:grid; grid-template-columns:1.6fr 1fr; gap:20px; margin-bottom:24px; }
-    .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:24px; }
-
-    .panel { background:#fff; border-radius:24px; box-shadow:0 8px 22px -12px rgba(30,50,80,0.22); border:1px solid #e7eff9; overflow:hidden; display:flex; flex-direction:column; }
+    .panel { background:#fff; border-radius:24px; box-shadow:0 8px 22px -12px rgba(30,50,80,0.22); border:1px solid #e7eff9; overflow:hidden; display:flex; flex-direction:column; margin-bottom:24px; }
     .panel-head { padding:18px 24px; border-bottom:1px solid #eef3fa; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
     .panel-head h3 { font-size:16px; font-weight:700; color:#1e2f4e; display:flex; align-items:center; gap:10px; }
     .panel-head h3 i { color:#3a6ea5; font-size:17px; }
     .panel-body { padding:18px 24px 22px; }
     .panel-body.no-pad { padding:0; }
 
+    /* TABLE */
     .table-wrap { overflow-x:auto; max-height:480px; overflow-y:auto; }
     table { width:100%; border-collapse:collapse; font-size:13.5px; }
     thead th { background:#f6faff; text-align:left; padding:12px 16px; font-size:11.5px; text-transform:uppercase; letter-spacing:0.7px; color:#5e7392; font-weight:700; border-bottom:1px solid #e2ebf5; position:sticky; top:0; z-index:1; }
@@ -68,11 +73,7 @@
 
     .empty-row { text-align:center; color:#9bb1cc; padding:36px 16px; font-style:italic; font-size:13.5px; }
 
-    .table-search { position:relative; }
-    .table-search input { padding:8px 14px 8px 34px; border:1.5px solid #d4e0f0; border-radius:30px; font-size:13px; background:#f9fcff; outline:none; width:220px; color:#1e2f4e; }
-    .table-search input:focus { border-color:#3a6ea5; background:#fff; box-shadow:0 0 0 3px rgba(58,110,165,0.12); }
-    .table-search i { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#8aa4c1; font-size:12px; }
-
+    /* FEED */
     .feed { max-height:480px; overflow-y:auto; padding:4px 0; }
     .feed-item { display:flex; align-items:flex-start; gap:14px; padding:14px 24px; border-bottom:1px solid #f0f4fa; }
     .feed-item:hover { background:#f7fbff; }
@@ -82,16 +83,18 @@
     .feed-avatar.check { background:linear-gradient(135deg,#1e8449,#0f5a2f); }
     .feed-avatar.lec { background:linear-gradient(135deg,#6c5ce7,#4a38c9); }
     .feed-avatar.grade { background:linear-gradient(135deg,#f5b942,#d98c00); }
+    .feed-avatar.login { background:linear-gradient(135deg,#0d9b8a,#057a6b); }
     .feed-content { flex:1; min-width:0; }
     .feed-title { font-size:13.5px; font-weight:600; color:#1e2f4e; margin-bottom:3px; }
     .feed-title .name { color:#2b7de9; }
     .feed-title .name.check { color:#1e8449; }
     .feed-title .name.lec { color:#6c5ce7; }
     .feed-title .name.grade { color:#b26b00; }
+    .feed-title .name.login { color:#0d9b8a; }
     .feed-meta { font-size:12px; color:#8aa4c1; display:flex; gap:12px; flex-wrap:wrap; }
     .feed-time { font-size:11px; color:#9bb1cc; white-space:nowrap; margin-top:2px; }
 
-    .bar-chart { margin-top:4px; }
+    /* BAR */
     .bar-row { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px dashed #eef3fa; font-size:13px; }
     .bar-row:last-child { border-bottom:none; }
     .bar-label { width:150px; flex-shrink:0; color:#4d627d; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -102,6 +105,7 @@
     .bar-fill.purple { background:linear-gradient(90deg,#6c5ce7,#a78bfa); }
     .bar-value { width:42px; text-align:right; font-weight:700; color:#1e2f4e; flex-shrink:0; font-size:13px; }
 
+    /* RING */
     .ring-wrap { display:flex; align-items:center; justify-content:center; flex-direction:column; padding:10px 0 4px; }
     .ring { width:150px; height:150px; border-radius:50%; display:flex; align-items:center; justify-content:center; position:relative; background:conic-gradient(#3a6ea5 0% 100%); transition:background 0.5s; }
     .ring::before { content:''; position:absolute; inset:14px; background:#fff; border-radius:50%; }
@@ -121,11 +125,98 @@
     .footer { background:#14263e; color:#8aa4c1; text-align:center; padding:18px 20px; font-size:12.5px; border-top:1px solid rgba(255,255,255,0.05); }
     .footer strong { color:#d6e2f0; }
 
-    @media (max-width:1100px) { .grid-2, .grid-3 { grid-template-columns:1fr; } }
+    /* ================= LECTURER ACTIVITY VIEW ================= */
+    .lec-selector {
+      background:#fff; border-radius:20px; padding:18px 22px;
+      border:1px solid #e7eff9; box-shadow:0 8px 22px -12px rgba(30,50,80,0.2);
+      display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:22px;
+    }
+    .lec-selector label { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#5e7392; }
+    .lec-selector select {
+      padding:10px 16px; border:1.5px solid #d4e0f0; border-radius:14px;
+      font-size:14px; background:#f9fcff; outline:none; color:#1e2f4e; min-width:280px;
+    }
+    .lec-selector select:focus { border-color:#3a6ea5; background:#fff; box-shadow:0 0 0 3px rgba(58,110,165,0.12); }
+    .lec-selector .btn-top { background:#1e3a5f; color:#fff; padding:10px 20px; }
+    .lec-selector .btn-top:hover { background:#2b4b77; }
+
+    .lec-hero {
+      background:linear-gradient(120deg,#1e3a5f,#2b4b77);
+      border-radius:24px; padding:26px 30px; color:#fff;
+      display:flex; align-items:center; gap:22px; flex-wrap:wrap;
+      margin-bottom:22px; box-shadow:0 12px 28px -12px rgba(10,25,50,0.4);
+    }
+    .lec-hero .avatar {
+      width:76px; height:76px; border-radius:50%;
+      background:linear-gradient(135deg,#f5b942,#d98c00);
+      display:flex; align-items:center; justify-content:center;
+      font-size:26px; font-weight:800; color:#1e2f4e;
+      box-shadow:0 8px 18px -6px rgba(0,0,0,0.4);
+    }
+    .lec-hero .info { flex:1; min-width:200px; }
+    .lec-hero .name { font-size:24px; font-weight:700; margin-bottom:4px; }
+    .lec-hero .dept { font-size:13px; color:#b8cde3; letter-spacing:1.2px; text-transform:uppercase; }
+    .lec-hero .badges { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .lec-hero .badge { background:rgba(255,255,255,0.12); padding:6px 14px; border-radius:30px; font-size:12px; border:1px solid rgba(255,255,255,0.15); }
+    .lec-hero .badge i { color:#f5b942; margin-right:6px; }
+
+    .lec-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:22px; }
+
+    .detail-list { list-style:none; }
+    .detail-list li { display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px dashed #eef3fa; font-size:13.5px; }
+    .detail-list li:last-child { border-bottom:none; }
+    .detail-list .key { color:#6e86a5; font-weight:500; }
+    .detail-list .val { color:#1e2f4e; font-weight:700; text-align:right; max-width:60%; word-break:break-word; }
+
+    .timeline { position:relative; padding-left:26px; }
+    .timeline::before {
+      content:''; position:absolute; left:8px; top:6px; bottom:6px;
+      width:2px; background:#e2ebf5; border-radius:2px;
+    }
+    .timeline-item { position:relative; padding:10px 0 10px 4px; font-size:13.5px; }
+    .timeline-item::before {
+      content:''; position:absolute; left:-23px; top:14px;
+      width:12px; height:12px; border-radius:50%;
+      background:#3a6ea5; border:2px solid #fff; box-shadow:0 0 0 2px #e2ebf5;
+    }
+    .timeline-item.grade::before { background:#f5b942; }
+    .timeline-item.reg::before { background:#6c5ce7; }
+    .timeline-item .t-title { color:#1e2f4e; font-weight:600; }
+    .timeline-item .t-meta { color:#8aa4c1; font-size:12px; margin-top:2px; }
+
+    .schedule-day {
+      background:#f6faff; border:1px solid #e2ebf5; border-radius:14px;
+      padding:12px 16px; margin-bottom:10px;
+    }
+    .schedule-day .day-name { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#6e86a5; font-weight:700; margin-bottom:6px; }
+    .schedule-day .slot { font-size:13.5px; color:#1e2f4e; padding:6px 0; display:flex; justify-content:space-between; border-bottom:1px dashed #eef3fa; }
+    .schedule-day .slot:last-child { border-bottom:none; }
+    .schedule-day .slot .time { color:#3a6ea5; font-weight:600; font-size:12.5px; }
+
+    .stat-mini {
+      display:flex; align-items:center; gap:12px;
+      background:#f6faff; border:1px solid #e2ebf5; border-radius:16px;
+      padding:14px 18px; flex:1; min-width:140px;
+    }
+    .stat-mini .ic {
+      width:42px; height:42px; border-radius:12px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:18px;
+    }
+    .stat-mini .ic.blue { background:#e3efff; color:#2b7de9; }
+    .stat-mini .ic.green { background:#e0f7e9; color:#1e8449; }
+    .stat-mini .ic.orange { background:#fff1d8; color:#d98c00; }
+    .stat-mini .ic.purple { background:#efe6ff; color:#6c5ce7; }
+    .stat-mini .v { font-size:20px; font-weight:800; color:#1e2f4e; line-height:1.1; }
+    .stat-mini .l { font-size:11px; color:#8aa4c1; text-transform:uppercase; letter-spacing:0.6px; font-weight:600; margin-top:2px; }
+
+    .stat-row-flex { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
+
+    @media (max-width:1100px) { .grid-2, .lec-grid { grid-template-columns:1fr; } }
     @media (max-width:600px) {
       .topbar { padding:14px 18px; }
       .topbar-titles .title { font-size:15px; }
       .main { padding:18px 16px 30px; }
+      .lec-hero .name { font-size:20px; }
     }
   </style>
 </head>
@@ -140,9 +231,10 @@
     </div>
   </div>
   <div class="topbar-right">
-    <a class="nav-link" href="https://aminejalloh-io.github.io/lecturer_form/"><i class="fas fa-chalkboard-user"></i> Lecturer Panel</a>
+    <button class="btn-top" id="navOverview" data-view="overview"><i class="fas fa-chart-pie"></i> Overview</button>
+    <button class="btn-top" id="navLecturers" data-view="lecturers"><i class="fas fa-chalkboard-user"></i> Lecturer Panel</button>
     <div class="live-badge"><span class="dot"></span> Live</div>
-    <button class="btn-refresh" id="refreshBtn"><i class="fas fa-rotate-right"></i> Refresh</button>
+    <button class="btn-top btn-refresh" id="refreshBtn"><i class="fas fa-rotate-right"></i> Refresh</button>
   </div>
 </div>
 
@@ -152,95 +244,91 @@
     <span id="errorText"></span>
   </div>
 
-  <!-- KPI -->
-  <section class="kpi-grid">
-    <div class="kpi-card"><div class="kpi-icon blue"><i class="fas fa-users"></i></div><div class="kpi-info"><div class="kpi-label">Total Students</div><div class="kpi-value" id="kpiTotalStudents">—</div><div class="kpi-sub">Registered</div></div></div>
-    <div class="kpi-card"><div class="kpi-icon purple"><i class="fas fa-chalkboard-user"></i></div><div class="kpi-info"><div class="kpi-label">Total Lecturers</div><div class="kpi-value" id="kpiTotalLecturers">—</div><div class="kpi-sub">Registered</div></div></div>
-    <div class="kpi-card"><div class="kpi-icon green"><i class="fas fa-calendar-check"></i></div><div class="kpi-info"><div class="kpi-label">Sign-ins Today</div><div class="kpi-value" id="kpiTodaySignins">—</div><div class="kpi-sub" id="kpiTodayDate">—</div></div></div>
-    <div class="kpi-card"><div class="kpi-icon orange"><i class="fas fa-chart-line"></i></div><div class="kpi-info"><div class="kpi-label">Total Sign-ins</div><div class="kpi-value" id="kpiTotalSignins">—</div><div class="kpi-sub">All-time</div></div></div>
-    <div class="kpi-card"><div class="kpi-icon teal"><i class="fas fa-award"></i></div><div class="kpi-info"><div class="kpi-label">Grades Published</div><div class="kpi-value" id="kpiGradesPublished">—</div><div class="kpi-sub">Visible to students</div></div></div>
-  </section>
+  <!-- ============================================================
+       OVERVIEW VIEW
+       ============================================================ -->
+  <div class="view active" id="viewOverview">
+    <section class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-icon blue"><i class="fas fa-users"></i></div><div class="kpi-info"><div class="kpi-label">Total Students</div><div class="kpi-value" id="kpiTotalStudents">—</div><div class="kpi-sub">Registered</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon purple"><i class="fas fa-chalkboard-user"></i></div><div class="kpi-info"><div class="kpi-label">Total Lecturers</div><div class="kpi-value" id="kpiTotalLecturers">—</div><div class="kpi-sub">Registered</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon green"><i class="fas fa-calendar-check"></i></div><div class="kpi-info"><div class="kpi-label">Sign-ins Today</div><div class="kpi-value" id="kpiTodaySignins">—</div><div class="kpi-sub" id="kpiTodayDate">—</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon orange"><i class="fas fa-chart-line"></i></div><div class="kpi-info"><div class="kpi-label">Total Sign-ins</div><div class="kpi-value" id="kpiTotalSignins">—</div><div class="kpi-sub">All-time</div></div></div>
+      <div class="kpi-card"><div class="kpi-icon teal"><i class="fas fa-award"></i></div><div class="kpi-info"><div class="kpi-label">Grades Published</div><div class="kpi-value" id="kpiGradesPublished">—</div><div class="kpi-sub">Visible to students</div></div></div>
+    </section>
 
-  <!-- Activity + Ring -->
-  <section class="grid-2">
-    <div class="panel">
-      <div class="panel-head"><h3><i class="fas fa-bolt"></i> Recent Activity</h3><span class="pill gray" id="feedCount">—</span></div>
-      <div class="feed" id="activityFeed"><div class="loading"><i class="fas fa-spinner"></i> Loading…</div></div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><h3><i class="fas fa-circle-half-stroke"></i> Today's Attendance</h3></div>
-      <div class="panel-body">
-        <div class="ring-wrap">
-          <div class="ring" id="attendanceRing"><div class="ring-inner"><div class="pct" id="ringPct">—</div><div class="lbl">Present</div></div></div>
-          <div class="ring-legend">
-            <span><i style="background:#3a6ea5;"></i> Signed in (<span id="legendPresent">—</span>)</span>
-            <span><i style="background:#eef3fa;"></i> Absent (<span id="legendAbsent">—</span>)</span>
+    <section class="grid-2">
+      <div class="panel">
+        <div class="panel-head"><h3><i class="fas fa-bolt"></i> Recent Activity</h3><span class="pill gray" id="feedCount">—</span></div>
+        <div class="feed" id="activityFeed"><div class="loading"><i class="fas fa-spinner"></i> Loading…</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3><i class="fas fa-circle-half-stroke"></i> Today's Attendance</h3></div>
+        <div class="panel-body">
+          <div class="ring-wrap">
+            <div class="ring" id="attendanceRing"><div class="ring-inner"><div class="pct" id="ringPct">—</div><div class="lbl">Present</div></div></div>
+            <div class="ring-legend">
+              <span><i style="background:#3a6ea5;"></i> Signed in (<span id="legendPresent">—</span>)</span>
+              <span><i style="background:#eef3fa;"></i> Absent (<span id="legendAbsent">—</span>)</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Students + Dept -->
-  <section class="grid-2">
-    <div class="panel">
-      <div class="panel-head">
-        <h3><i class="fas fa-address-book"></i> Student Directory</h3>
-        <div class="table-search"><i class="fas fa-magnifying-glass"></i><input type="text" id="studentSearch" placeholder="Search name or ID…" /></div>
+    <section class="grid-2">
+      <div class="panel">
+        <div class="panel-head">
+          <h3><i class="fas fa-address-book"></i> Student Directory</h3>
+          <div class="table-search" style="position:relative;"><i class="fas fa-magnifying-glass" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#8aa4c1;font-size:12px;"></i><input type="text" id="studentSearch" placeholder="Search name or ID…" style="padding:8px 14px 8px 34px;border:1.5px solid #d4e0f0;border-radius:30px;font-size:13px;background:#f9fcff;outline:none;width:220px;color:#1e2f4e;" /></div>
+        </div>
+        <div class="panel-body no-pad">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Student ID</th><th>Department</th><th>Year</th><th>Present</th><th>Last Sign-in</th></tr></thead>
+              <tbody id="studentTableBody"><tr><td colspan="6" class="empty-row">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
       </div>
+      <div class="panel">
+        <div class="panel-head"><h3><i class="fas fa-building-columns"></i> By Department</h3></div>
+        <div class="panel-body"><div class="bar-chart" id="deptChart"><div class="loading"><i class="fas fa-spinner"></i> Loading…</div></div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h3><i class="fas fa-clipboard-list"></i> Sign-in Log (latest 50)</h3><span class="pill blue" id="signinCount">—</span></div>
       <div class="panel-body no-pad">
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Name</th><th>Student ID</th><th>Department</th><th>Year</th><th>Present</th><th>Last Sign-in</th></tr></thead>
-            <tbody id="studentTableBody"><tr><td colspan="6" class="empty-row">Loading…</td></tr></tbody>
+            <thead><tr><th>Student</th><th>Student ID</th><th>Department</th><th>Year</th><th>Date</th><th>Signed At</th><th>Signature</th></tr></thead>
+            <tbody id="signinTableBody"><tr><td colspan="7" class="empty-row">Loading…</td></tr></tbody>
           </table>
         </div>
       </div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><h3><i class="fas fa-building-columns"></i> By Department</h3></div>
-      <div class="panel-body"><div class="bar-chart" id="deptChart"><div class="loading"><i class="fas fa-spinner"></i> Loading…</div></div></div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <!-- NEW: Lecturers + Grades -->
-  <section class="grid-2">
-    <div class="panel">
-      <div class="panel-head"><h3><i class="fas fa-chalkboard-user"></i> Registered Lecturers</h3><span class="pill purple" id="lecturerCount">—</span></div>
-      <div class="panel-body no-pad">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Name</th><th>Lecturer ID</th><th>Department</th><th>Modules</th><th>Registered</th></tr></thead>
-            <tbody id="lecturerTableBody"><tr><td colspan="5" class="empty-row">Loading…</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><h3><i class="fas fa-award"></i> Recent Grades</h3><span class="pill orange" id="gradeCount">—</span></div>
-      <div class="panel-body no-pad">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Student</th><th>Module</th><th>Score</th><th>Grade</th><th>Published</th></tr></thead>
-            <tbody id="gradesTableBody"><tr><td colspan="5" class="empty-row">Loading…</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ============================================================
+       LECTURER ACTIVITY VIEW
+       ============================================================ -->
+  <div class="view" id="viewLecturers">
 
-  <!-- Sign-in log -->
-  <section class="panel">
-    <div class="panel-head"><h3><i class="fas fa-clipboard-list"></i> Sign-in Log (latest 50)</h3><span class="pill blue" id="signinCount">—</span></div>
-    <div class="panel-body no-pad">
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Student</th><th>Student ID</th><th>Department</th><th>Year</th><th>Date</th><th>Signed At</th><th>Signature</th></tr></thead>
-          <tbody id="signinTableBody"><tr><td colspan="7" class="empty-row">Loading…</td></tr></tbody>
-        </table>
+    <div class="lec-selector">
+      <label for="lecSelect"><i class="fas fa-user-tie"></i> Select Lecturer</label>
+      <select id="lecSelect"><option value="">— Loading lecturers… —</option></select>
+      <button class="btn-top" id="loadLecBtn"><i class="fas fa-eye"></i> View Activity</button>
+    </div>
+
+    <div id="lecActivityWrap">
+      <div class="panel">
+        <div class="panel-body" style="text-align:center; padding:48px 24px; color:#8aa4c1;">
+          <i class="fas fa-chalkboard-user" style="font-size:40px; opacity:0.4; margin-bottom:14px;"></i>
+          <div style="font-size:15px; font-style:italic;">Select a lecturer above to view their activity.</div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </main>
 
 <footer class="footer"><strong>MbAC Daily Presence · Admin Dashboard</strong> — © <span id="footerYear"></span> Malik bin Anas College of West Africa</footer>
@@ -252,9 +340,14 @@ const SUPABASE_URL = 'https://tvbuxljxkvflntjububs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR2YnV4bGp4a3ZmbG50anVidWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUwMzAzOTYsImV4cCI6MjExMDYwNjM5Nn0.74vBpNRFSWwyqIAMnakvA0NhSst2Qnzh4tIzFmvt65g';
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const refreshBtn = document.getElementById('refreshBtn');
+// DOM
 const errorBox = document.getElementById('errorBox');
 const errorText = document.getElementById('errorText');
+const refreshBtn = document.getElementById('refreshBtn');
+const navOverview = document.getElementById('navOverview');
+const navLecturers = document.getElementById('navLecturers');
+const viewOverview = document.getElementById('viewOverview');
+const viewLecturers = document.getElementById('viewLecturers');
 
 const kpiTotalStudents = document.getElementById('kpiTotalStudents');
 const kpiTotalLecturers = document.getElementById('kpiTotalLecturers');
@@ -269,28 +362,30 @@ const attendanceRing = document.getElementById('attendanceRing');
 const ringPct = document.getElementById('ringPct');
 const legendPresent = document.getElementById('legendPresent');
 const legendAbsent = document.getElementById('legendAbsent');
-
 const studentTableBody = document.getElementById('studentTableBody');
 const signinTableBody = document.getElementById('signinTableBody');
 const signinCount = document.getElementById('signinCount');
 const deptChart = document.getElementById('deptChart');
 const studentSearch = document.getElementById('studentSearch');
 
-const lecturerTableBody = document.getElementById('lecturerTableBody');
-const lecturerCount = document.getElementById('lecturerCount');
-const gradesTableBody = document.getElementById('gradesTableBody');
-const gradeCount = document.getElementById('gradeCount');
+const lecSelect = document.getElementById('lecSelect');
+const loadLecBtn = document.getElementById('loadLecBtn');
+const lecActivityWrap = document.getElementById('lecActivityWrap');
 
+// STATE
 let allStudents = [], allStats = [], allSignins = [], allLecturers = [], allGrades = [];
 
+// HELPERS
 function showError(msg) { errorText.textContent = msg; errorBox.style.display = 'flex'; }
 function hideError() { errorBox.style.display = 'none'; }
 function esc(s) { if (s == null) return ''; return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function initials(name) { if (!name) return '?'; const p = name.trim().split(/\s+/); return p.length === 1 ? p[0].substring(0,2).toUpperCase() : (p[0][0] + p[p.length-1][0]).toUpperCase(); }
 function fmtDateTime(iso) { if (!iso) return '—'; const d = new Date(iso); return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + ' · ' + d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); }
+function fmtDate(iso) { if (!iso) return '—'; return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
 function timeAgo(iso) { if (!iso) return ''; const d = new Date(iso); const diff = Math.floor((Date.now() - d.getTime())/1000); if (diff < 60) return diff + 's ago'; if (diff < 3600) return Math.floor(diff/60) + 'm ago'; if (diff < 86400) return Math.floor(diff/3600) + 'h ago'; if (diff < 604800) return Math.floor(diff/86400) + 'd ago'; return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }
 function todayISO() { return new Date().toISOString().slice(0,10); }
 
+// DATA FETCH
 async function fetchStudents() {
   const { data, error } = await supabase.from('students').select('*').order('created_at',{ascending:false});
   if (error) throw error; return data || [];
@@ -316,7 +411,15 @@ async function fetchGrades() {
     .order('published_at',{ascending:false}).limit(20);
   if (error) return []; return data || [];
 }
+async function fetchActivity(lecId) {
+  const { data, error } = await supabase.rpc('get_lecturer_activity', { p_lecturer_id: lecId });
+  if (error) throw error;
+  return data;
+}
 
+// ============================================================
+// OVERVIEW RENDERERS
+// ============================================================
 function renderKPIs(students, stats, signins, lecturers, grades) {
   kpiTotalStudents.textContent = students.length;
   kpiTotalLecturers.textContent = lecturers.length;
@@ -345,7 +448,6 @@ function renderActivity(students, signins, lecturers, grades) {
   events.sort((a,b) => new Date(b.time) - new Date(a.time));
   const recent = events.slice(0,30);
   feedCount.textContent = recent.length + ' events';
-
   if (!recent.length) { activityFeed.innerHTML = '<div class="empty-row">No activity yet.</div>'; return; }
 
   const labels = { reg:' registered', check:' signed in', lec:' (lecturer) registered', grade:' received a grade' };
@@ -394,23 +496,162 @@ function renderDeptChart() {
   }).join('');
 }
 
-function renderLecturers() {
-  if (!allLecturers.length) { lecturerTableBody.innerHTML = '<tr><td colspan="5" class="empty-row">No lecturers registered yet.</td></tr>'; lecturerCount.textContent = '0 lecturers'; return; }
-  lecturerCount.textContent = allLecturers.length + ' lecturers';
-  lecturerTableBody.innerHTML = allLecturers.map(l => `
-    <tr><td><strong>${esc(l.full_name)}</strong></td><td>${esc(l.lecturer_id)}</td><td><span class="pill purple">${esc(l.department)}</span></td><td>${l.module_count}</td><td>${fmtDateTime(l.created_at)}</td></tr>
-  `).join('');
+// ============================================================
+// LECTURER ACTIVITY RENDERER
+// ============================================================
+function renderLecturerActivity(activity) {
+  if (!activity || activity.success === false) {
+    lecActivityWrap.innerHTML = `
+      <div class="panel">
+        <div class="panel-body" style="text-align:center; padding:36px; color:#c0392b;">
+          <i class="fas fa-circle-exclamation" style="font-size:32px; margin-bottom:10px;"></i>
+          <div>${esc(activity?.message || 'Could not load lecturer activity.')}</div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const p = activity.profile;
+  const modules = activity.modules || [];
+  const grades = activity.grades || [];
+  const logins = activity.logins || [];
+
+  // Group modules by day
+  const byDay = {};
+  modules.forEach(m => {
+    if (!byDay[m.day_of_week]) byDay[m.day_of_week] = [];
+    byDay[m.day_of_week].push(m);
+  });
+  const dayOrder = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const orderedDays = dayOrder.filter(d => byDay[d]);
+
+  const scheduleHTML = orderedDays.length ? orderedDays.map(day => `
+    <div class="schedule-day">
+      <div class="day-name">${esc(day)}</div>
+      ${byDay[day].map(m => `
+        <div class="slot">
+          <span>${esc(m.module_name)}</span>
+          <span class="time">${esc(m.period_start)} – ${esc(m.period_end)}</span>
+        </div>
+      `).join('')}
+    </div>
+  `).join('') : '<div class="empty-state" style="text-align:center;padding:20px;color:#9bb1cc;font-style:italic;">No modules scheduled.</div>';
+
+  const timelineEvents = [
+    ...logins.map(l => ({ type:'login', time:l.logged_in_at, title:'Logged in', meta:'Authentication' })),
+    ...grades.map(g => ({ type:'grade', time:g.published_at, title:`Published grade for ${g.student_name}`, meta:`${g.module_name} · ${g.score}% (${g.letter_grade})` })),
+    { type:'reg', time:p.registered_at, title:'Registered as lecturer', meta:`${p.lecturer_id}` }
+  ].filter(e => e.time).sort((a,b) => new Date(b.time) - new Date(a.time)).slice(0, 15);
+
+  const timelineHTML = timelineEvents.length ? timelineEvents.map(e => `
+    <div class="timeline-item ${e.type}">
+      <div class="t-title">${esc(e.title)}</div>
+      <div class="t-meta">${esc(e.meta)} · ${fmtDateTime(e.time)}</div>
+    </div>
+  `).join('') : '<div class="empty-state" style="text-align:center;padding:20px;color:#9bb1cc;font-style:italic;">No activity yet.</div>';
+
+  lecActivityWrap.innerHTML = `
+    <div class="lec-hero">
+      <div class="avatar">${initials(p.full_name)}</div>
+      <div class="info">
+        <div class="name">${esc(p.full_name)}</div>
+        <div class="dept">${esc(p.department)}</div>
+        <div class="badges">
+          <span class="badge"><i class="fas fa-id-card"></i>${esc(p.lecturer_id)}</span>
+          <span class="badge"><i class="fas fa-calendar"></i>Joined ${fmtDate(p.registered_at)}</span>
+          ${activity.last_login ? `<span class="badge"><i class="fas fa-clock"></i>Last login ${timeAgo(activity.last_login)}</span>` : ''}
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-row-flex">
+      <div class="stat-mini"><div class="ic blue"><i class="fas fa-book"></i></div><div><div class="v">${modules.length}</div><div class="l">Modules</div></div></div>
+      <div class="stat-mini"><div class="ic green"><i class="fas fa-award"></i></div><div><div class="v">${activity.grade_count}</div><div class="l">Grades Published</div></div></div>
+      <div class="stat-mini"><div class="ic orange"><i class="fas fa-right-to-bracket"></i></div><div><div class="v">${logins.length}</div><div class="l">Logins Recorded</div></div></div>
+      <div class="stat-mini"><div class="ic purple"><i class="fas fa-calendar-day"></i></div><div><div class="v">${orderedDays.length}</div><div class="l">Active Days</div></div></div>
+    </div>
+
+    <div class="lec-grid">
+      <div class="panel" style="margin-bottom:0;">
+        <div class="panel-head"><h3><i class="fas fa-id-badge"></i> Registration Details</h3></div>
+        <div class="panel-body">
+          <ul class="detail-list">
+            <li><span class="key">Full Name</span><span class="val">${esc(p.full_name)}</span></li>
+            <li><span class="key">Lecturer ID</span><span class="val">${esc(p.lecturer_id)}</span></li>
+            <li><span class="key">Department</span><span class="val">${esc(p.department)}</span></li>
+            <li><span class="key">National ID</span><span class="val">${esc(p.national_id)}</span></li>
+            <li><span class="key">NIN</span><span class="val">${esc(p.nin)}</span></li>
+            <li><span class="key">Registered On</span><span class="val">${fmtDateTime(p.registered_at)}</span></li>
+            <li><span class="key">Profile Updated</span><span class="val">${fmtDateTime(p.updated_at)}</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:0;">
+        <div class="panel-head"><h3><i class="fas fa-clock-rotate-left"></i> Recent Activity Timeline</h3></div>
+        <div class="panel-body">
+          <div class="timeline">${timelineHTML}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lec-grid">
+      <div class="panel" style="margin-bottom:0;">
+        <div class="panel-head"><h3><i class="fas fa-calendar-week"></i> Daily Syllabus Schedule</h3></div>
+        <div class="panel-body">${scheduleHTML}</div>
+      </div>
+
+      <div class="panel" style="margin-bottom:0;">
+        <div class="panel-head"><h3><i class="fas fa-right-to-bracket"></i> Login History</h3><span class="pill teal" style="background:#dcf5f0;color:#0d9b8a;">${logins.length} sessions</span></div>
+        <div class="panel-body no-pad">
+          <div class="table-wrap" style="max-height:340px;">
+            <table>
+              <thead><tr><th>#</th><th>Date</th><th>Time</th></tr></thead>
+              <tbody>
+                ${logins.length ? logins.map((l, i) => `
+                  <tr>
+                    <td>${i+1}</td>
+                    <td>${new Date(l.logged_in_at).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})}</td>
+                    <td>${new Date(l.logged_in_at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</td>
+                  </tr>
+                `).join('') : '<tr><td colspan="3" class="empty-row">No logins yet.</td></tr>'}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h3><i class="fas fa-award"></i> Grading Details</h3><span class="pill orange">${grades.length} entries</span></div>
+      <div class="panel-body no-pad">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student</th><th>Student ID</th><th>Module</th><th>Score</th><th>Grade</th><th>Remarks</th><th>Published</th></tr></thead>
+            <tbody>
+              ${grades.length ? grades.map(g => {
+                const cls = g.score >= 70 ? 'green' : g.score >= 50 ? 'orange' : 'red';
+                return `<tr>
+                  <td><strong>${esc(g.student_name)}</strong></td>
+                  <td>${esc(g.student_id)}</td>
+                  <td>${esc(g.module_name)}</td>
+                  <td>${g.score}%</td>
+                  <td><span class="pill ${cls}">${esc(g.letter_grade)}</span></td>
+                  <td>${esc(g.remarks || '—')}</td>
+                  <td>${fmtDateTime(g.published_at)}</td>
+                </tr>`;
+              }).join('') : '<tr><td colspan="7" class="empty-row">No grades published yet.</td></tr>'}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
-function renderGrades() {
-  if (!allGrades.length) { gradesTableBody.innerHTML = '<tr><td colspan="5" class="empty-row">No grades published yet.</td></tr>'; gradeCount.textContent = '0 grades'; return; }
-  gradeCount.textContent = allGrades.length + ' grades';
-  gradesTableBody.innerHTML = allGrades.map(g => {
-    const cls = g.score >= 70 ? 'green' : g.score >= 50 ? 'orange' : 'red';
-    return `<tr><td><strong>${esc(g.students?.full_name || '—')}</strong><br><small style="color:#8aa4c1;">${esc(g.students?.student_id || '')}</small></td><td>${esc(g.module_name)}</td><td>${g.score}%</td><td><span class="pill ${cls}">${esc(g.letter_grade)}</span></td><td>${fmtDateTime(g.published_at)}</td></tr>`;
-  }).join('');
-}
-
+// ============================================================
+// DATA LOADING
+// ============================================================
 async function loadAll() {
   hideError();
   refreshBtn.classList.add('spinning');
@@ -424,8 +665,7 @@ async function loadAll() {
     renderStudentTable();
     renderSigninTable();
     renderDeptChart();
-    renderLecturers();
-    renderGrades();
+    populateLecturerSelect();
   } catch (err) {
     console.error(err);
     showError('Could not load dashboard data: ' + (err.message || err));
@@ -434,13 +674,76 @@ async function loadAll() {
   }
 }
 
-refreshBtn.addEventListener('click', loadAll);
-studentSearch.addEventListener('input', renderStudentTable);
+function populateLecturerSelect() {
+  const current = lecSelect.value;
+  if (!allLecturers.length) {
+    lecSelect.innerHTML = '<option value="">— No lecturers registered —</option>';
+    return;
+  }
+  lecSelect.innerHTML = '<option value="">— Select a lecturer —</option>' +
+    allLecturers.map(l => `<option value="${esc(l.lecturer_id)}">${esc(l.full_name)} (${esc(l.lecturer_id)})</option>`).join('');
+  if (current) lecSelect.value = current;
+}
 
+async function loadLecturerActivity() {
+  const lecId = lecSelect.value;
+  if (!lecId) {
+    lecActivityWrap.innerHTML = `
+      <div class="panel">
+        <div class="panel-body" style="text-align:center; padding:48px 24px; color:#8aa4c1;">
+          <i class="fas fa-chalkboard-user" style="font-size:40px; opacity:0.4; margin-bottom:14px;"></i>
+          <div style="font-size:15px; font-style:italic;">Select a lecturer above to view their activity.</div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  lecActivityWrap.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading lecturer activity…</div>';
+  try {
+    const activity = await fetchActivity(lecId);
+    renderLecturerActivity(activity);
+  } catch (err) {
+    console.error(err);
+    lecActivityWrap.innerHTML = `<div class="panel"><div class="panel-body" style="text-align:center; padding:36px; color:#c0392b;"><i class="fas fa-circle-exclamation" style="font-size:32px; margin-bottom:10px;"></i><div>${esc(err.message || 'Failed to load activity.')}</div></div></div>`;
+  }
+}
+
+// ============================================================
+// VIEW SWITCHING
+// ============================================================
+function switchView(view) {
+  viewOverview.classList.toggle('active', view === 'overview');
+  viewLecturers.classList.toggle('active', view === 'lecturers');
+  navOverview.classList.toggle('active', view === 'overview');
+  navLecturers.classList.toggle('active', view === 'lecturers');
+  if (view === 'lecturers') populateLecturerSelect();
+}
+
+navOverview.addEventListener('click', () => switchView('overview'));
+navLecturers.addEventListener('click', () => switchView('lecturers'));
+
+// ============================================================
+// EVENTS
+// ============================================================
+refreshBtn.addEventListener('click', () => {
+  loadAll();
+  if (viewLecturers.classList.contains('active') && lecSelect.value) loadLecturerActivity();
+});
+studentSearch.addEventListener('input', renderStudentTable);
+loadLecBtn.addEventListener('click', loadLecturerActivity);
+lecSelect.addEventListener('change', loadLecturerActivity);
+
+// ============================================================
+// INIT
+// ============================================================
 (function init() {
   document.getElementById('footerYear').textContent = new Date().getFullYear();
+  switchView('overview');
   loadAll();
-  setInterval(loadAll, 30000);
+  setInterval(() => {
+    loadAll();
+    if (viewLecturers.classList.contains('active') && lecSelect.value) loadLecturerActivity();
+  }, 30000);
 })();
 </script>
 </body>
